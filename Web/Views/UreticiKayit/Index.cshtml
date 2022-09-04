@@ -1,0 +1,160 @@
+﻿@model List<ur_toplam>
+
+@{
+    int RowNo = 0;
+    decimal? kesinti = 0;
+    string Toplam = "";
+    string ToplamKesinti = "";
+    string ToplamOdenecek = "";
+    string ToplamNakliye = "";
+
+
+
+    decimal? valToplam = Model.Where(x => x.yedek1_string == null).Sum(x => x.toplam);
+    decimal? valNakliye = Model.Where(x => x.yedek1_string == null).Sum(x => x.nak_zarar);
+    decimal? valOdenecek = Model.Where(x => x.yedek1_string == null).Sum(x => x.odenecek);
+
+    if (valToplam.HasValue)
+    {
+        Toplam = string.Format("{0:C}", valToplam.Value);
+    }
+
+    if (valNakliye.HasValue)
+    {
+        ToplamNakliye = string.Format("{0:C}", valNakliye.Value);
+    }
+
+    if (valOdenecek.HasValue)
+    {
+        ToplamOdenecek = string.Format("{0:C}", valOdenecek.Value);
+    }
+
+    if (valToplam.HasValue && valOdenecek.HasValue)
+    {
+        ToplamKesinti = string.Format("{0:C}", valToplam.Value - valOdenecek.Value);
+    }
+
+}
+
+
+<table class="table table-responsive table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Şube
+            </th>
+            <th>
+                Toplam
+            </th>
+
+            <th>
+                Kesinti
+            </th>
+
+            <th>
+                Nakliye Zarar
+            </th>
+
+            <th>
+                Ödenecek
+            </th>
+            <th>
+                ...
+            </th>
+
+            <th>
+                Tarih
+            </th>
+
+            <th>
+                Sıra No
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @{RowNo++;} @RowNo
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sube)
+                </td>
+
+                @if (!string.IsNullOrEmpty(item.yedek1_string))
+                {
+                    <td align="center" colspan="5">
+                        <h4>@item.yedek1_string</h4>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.toplam)
+                    </td>
+
+                    <td>
+                        @{kesinti = item.toplam - item.odenecek;}
+                        @Html.DisplayFor(modelItem => kesinti)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nak_zarar)
+                    </td>
+
+                    <td class="gizlenecek">
+                        @Html.DisplayFor(modelItem => item.odenecek)
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink(
+                            "Detaylar",
+                            "KayitDetay",
+                            new { kayit_id = item.KAYIT_BASLIK_ID },
+                            new { @class = "btn btn-success" }
+                            )*@
+                        @*@Html.ActionLink("Detaylar", "KayitDetay", new { sube = item._SUBE.Trim(), tarih = item.ISLEM_TARIHI, sira_no = item.DEPO_SIRA_NO }, new { @class = "btn btn-success" })*@
+                        @Html.ActionLink("Detay", "KayitDetay", new { sube = item.sube.Trim(), tarih = item.tarih, sira_no = item.depo_sira_no }, new { @class = "btn btn-success" })
+
+                    </td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.tarih)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.depo_sira_no)
+                </td>
+            </tr>
+        }
+
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                @Toplam
+            </td>
+            <td>
+                @ToplamKesinti
+            </td>
+            <td>
+                @ToplamNakliye
+            </td>
+            <td>
+                @ToplamOdenecek
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+        </tr>
+
+    </tbody>
+</table>

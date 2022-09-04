@@ -1,0 +1,99 @@
+﻿@model URETICILER
+
+@{
+    ViewBag.Title = "Üretici - Giriş Sayfası";
+}
+
+@*<link href="~/css/login-register.css" rel="stylesheet" />*@
+
+<style>
+    .main {
+        margin-top: 30px;
+    }
+
+    i {
+        font-size: x-large
+    }
+
+    button {
+        width: 500px;
+    }
+    .main-content {
+        border: 2px solid #009edf;
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px 40px;
+        color: #ccc;
+        text-shadow: none;
+    }
+
+    .form-header {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #009edf;
+        color: #fff;
+        width: 100%;
+        padding: 20px 0px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    <div class="row main">
+
+
+        <div class="main-content">
+
+
+            @Html.ValidationSummary(false)
+
+
+            @if (@ViewBag.Result != null)
+            {
+                <div class="alert alert-@ViewBag.Status" role="alert">
+                    <h4 style="text-align:center"> @ViewBag.Result </h4>
+                </div>
+            }
+
+
+
+
+            <div class="form-header">
+                <h1 class="text-center">Üretici Giriş</h1>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-circle"> </i> </span>
+                <input class="form-control" placeholder="Kullanıcı Adınız" name="User" />
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2"> <i class="bi bi-lock-fill"> </i> </span>
+                <input class="form-control" type="password" placeholder="Parolanız" name="Password" />
+            </div>
+
+
+            <div class="input-group">
+                <button type="submit" class="btn btn-danger btn-lg">Onay</button>
+            </div>
+
+            <br />
+
+            <div class="input-group">
+                <h4> Sistemde görünen kayıtlar bilgilendirme amaçlı olup, anlaşmazlık durumunda kooperatif kayıtları geçerlidir.</h4>
+            </div>
+
+        </div>
+    </div>
+
+}

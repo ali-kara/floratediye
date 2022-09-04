@@ -2,38 +2,34 @@
 
 
 
-
-<div class="col-md-6">
-
-
-    @Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
 
 
 
 
-    @if (!Model.Any())
-    {
-        <hr />
-        <h4>Henüz Ödemeniz Bulunmamaktadır.</h4>
-    }
-    else
-    {
+@if (!Model.Any())
+{
+    <hr />
+    <h4>Henüz Ödemeniz Bulunmamaktadır.</h4>
+}
+else
+{
 
-        <br />
-
-        <br />
-        <table class="table table-striped table-bordered">
+    <table class="table table-responsive table-striped table-bordered">
+        <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.TARIH)
+                    Tarih
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ODEME)
+                    Ödeme
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ACIKLAMA)
+                    Açıklama
                 </th>
             </tr>
+        </thead>
+        <tbody>
 
             @foreach (var item in Model)
             {
@@ -53,8 +49,7 @@
                     </td>
                 </tr>
             }
+        </tbody>
+    </table>
 
-        </table>
-
-    }
-</div>
+}

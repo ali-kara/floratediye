@@ -56,12 +56,12 @@ namespace Core.DataAccess.EntityFramework
         }
         public IEnumerable<TEntity> GetIEnum(Expression<Func<TEntity, bool>>? filter = null)
         {
-            using (TContext context = new TContext())
-            {
-                return filter == null
-                    ? context.Set<TEntity>()
-                    : context.Set<TEntity>().Where(filter);
-            }
+            TContext context = new TContext();
+
+            return filter == null
+                ? context.Set<TEntity>()
+                : context.Set<TEntity>().Where(filter);
+
         }
         public List<TEntity> GetList(Expression<Func<TEntity, bool>>? filter = null)
         {

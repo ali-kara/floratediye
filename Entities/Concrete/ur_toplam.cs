@@ -15,10 +15,10 @@ namespace Entities.Concrete
         public DateTime? tarih { get; set; }
 
         [StringLength(10)]
-        public string ur_no { get; set; }
+        public string? ur_no { get; set; }
 
         [StringLength(10)]
-        public string tedno { get; set; }
+        public string? tedno { get; set; }
 
         public decimal? toplam { get; set; }
 
@@ -55,22 +55,22 @@ namespace Entities.Concrete
         public decimal? nak_zarar { get; set; }
 
         [StringLength(30)]
-        public string il { get; set; }
+        public string? il { get; set; }
 
         [StringLength(30)]
-        public string uretici { get; set; }
+        public string? uretici { get; set; }
 
         [StringLength(10)]
-        public string tip { get; set; }
+        public string? tip { get; set; }
 
         [StringLength(10)]
-        public string sube { get; set; }
+        public string? sube { get; set; }
 
         [StringLength(10)]
-        public string tediye_yazildimi { get; set; }
+        public string? tediye_yazildimi { get; set; }
 
         [StringLength(30)]
-        public string yedek1_string { get; set; }
+        public string? yedek1_string { get; set; }
 
         public int? yedek_int { get; set; }
 

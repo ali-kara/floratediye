@@ -8,12 +8,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="Views\UreticiKayit\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
+    <PackageReference Include="FontAwesome" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,4 +29,9 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+    <None Remove="FontAwesome" />
+    <None Remove="Views\UreticiKayit\" />
+  </ItemGroup>
 </Project>

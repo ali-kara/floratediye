@@ -45,6 +45,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UreticiKayitManager>().As<IUreticiKayitService>().SingleInstance();
             builder.RegisterType<efUreticiKayitDAL>().As<IUreticiKayitDAL>().SingleInstance();
 
+            builder.RegisterType<SatisManager>().As<ISatisService>().SingleInstance();
+            builder.RegisterType<efSatisDAL>().As<ISatisDAL>().SingleInstance();
+
             builder.RegisterType<UreticilerManager>().As<IUreticilerService>().SingleInstance();
             builder.RegisterType<efUreticilerDAL>().As<IUreticilerDAL>().SingleInstance();
 

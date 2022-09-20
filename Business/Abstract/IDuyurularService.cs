@@ -6,10 +6,10 @@ namespace Business.Abstract
 {
     public interface IDuyurularService
     {
-        DuyurularDTO DuyuruGetir(int id);
+        Duyurular DuyuruGetir(int id);
         List<DuyurularDTO> DuyurulariGetir();
         bool Sil(int id);
-        List<Duyurular> DuyurularimiGetir(URETICILER uretici);
-        List<UreticiDuyurularimDTO> TumDuyurularimiGetir(URETICILER uretici);
+        List<Duyurular> DuyurularimiGetir(int UreticiID);
+        List<Duyurular> DuyurularimiGetir(URETICILER Uretici);
     }
 }

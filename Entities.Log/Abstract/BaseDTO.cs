@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Log.Abstract
 {
-    public class BaseViewModel
+    public class BaseDTO
     {
         public Exception exception;
     }

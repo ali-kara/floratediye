@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Entities.Log.DTO
 {
-    public class UreticiDuyurularimDTO : BaseViewModel
+    public class UreticiDuyurularimDTO : BaseDTO
     {
         [DisplayName("Başlık")]
         public string Baslik { get; set; }

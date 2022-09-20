@@ -37,6 +37,46 @@
 }
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+
+
+            <div class="col-3">
+                <button type="submit" id="KayitGetirButon" class="btn btn-success btn-block">
+                    Getir
+                </button>
+            </div>
+
+            <div class="col-3">
+                <div class="input-group date">
+                    <input id="datepickeraa" name="datepickeraa" type="text" class="form-control" value="@DateTime.Now.AddDays(4).ToShortDateString()">
+                    <span class="input-group-addon">
+                        <i class="bi bi-calendar-date"></i>
+                    </span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>$('#datepickeraa').datepicker({
+        format: "dd.mm.yyyy",
+        maxViewMode: 2,
+        clearBtn: true,
+        language: "tr",
+        calendarWeeks: true,
+        autoclose: true,
+        todayHighlight: true,
+        toggleActive: true
+    });</script>
+
+
+<br />
+
 <table class="table table-responsive table-striped table-bordered">
     <thead>
         <tr>
@@ -120,7 +160,7 @@
                             new { @class = "btn btn-success" }
                             )*@
                         @*@Html.ActionLink("Detaylar", "KayitDetay", new { sube = item._SUBE.Trim(), tarih = item.ISLEM_TARIHI, sira_no = item.DEPO_SIRA_NO }, new { @class = "btn btn-success" })*@
-                        @Html.ActionLink("Detay", "KayitDetay", new { sube = item.sube.Trim(), tarih = item.tarih, sira_no = item.depo_sira_no }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Detay", "kayitdetay", new { sube = item.sube.Trim(), tarih = item.tarih, sira_no = item.depo_sira_no }, new { @class = "btn btn-success" })
 
                     </td>
                 }

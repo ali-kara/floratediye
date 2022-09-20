@@ -10,10 +10,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-
+        builder.Services.AddSession(options => {
+            options.IdleTimeout = TimeSpan.FromMinutes(60);
+        });
 
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -34,6 +35,8 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
+
+        app.UseSession();
 
         app.UseAuthorization();
 

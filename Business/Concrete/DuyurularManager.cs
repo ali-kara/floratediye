@@ -15,10 +15,41 @@ namespace Business.Concrete
             this.duyurularDAL = duyurularDAL;
         }
 
-        public DuyurularDTO DuyuruGetir(int id)
+        public Duyurular DuyuruGetir(int id)
         {
-            return null;
+            return duyurularDAL.Get(x => x.DuyuruID == id);
         }
+
+        public List<Duyurular> UreticiDuyurularıGetir(int UreticiID)
+        {
+            var list = duyurularDAL.GetList();
+
+            return list;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public List<DuyurularDTO> DuyurulariGetir()
         {
@@ -31,7 +62,7 @@ namespace Business.Concrete
             return null;
         }
 
-        public List<Duyurular> DuyurularimiGetir(URETICILER uretici)
+        public List<Duyurular> DuyurularimiGetir(URETICILER Uretici)
         {
             ////List<Duyurular> list = GetList(x => x.IsExpired == false
             ////&& (x.BitisTarihi.HasValue == false
@@ -98,32 +129,12 @@ namespace Business.Concrete
 
         public List<UreticiDuyurularimDTO> TumDuyurularimiGetir(URETICILER uretici)
         {
-            //List<vmUreticiDuyurularim> list = (
-            //               from DK in context.DuyurularKayit
-            //               join D in context.Duyurular
-            //               on DK.DuyuruID equals D.DuyuruID
-            //               where
-            //              (
-            //              D.Pasif != true
-            //              &&
+            return duyurularDAL.TumDuyurularimiGetir(uretici);
+        }
 
-            //               (D.HerkeseMi == true)
-            //               ||
-            //               (D.HerkeseMi == false && D.Bolge == uretici.IL)
-            //               )
-            //               select new vmUreticiDuyurularim
-            //               {
-            //                   Baslik = D.Baslik,
-            //                   Mesaj = D.Mesaj,
-            //                   DuyuruTarihi = D.OlusturmaTarihi.Value,
-            //                   OnayTarihi = DK.OlusturmaTarihi
-            //               }).ToList();
-
-
-
-            //return list;
-
-            return null;
+        public List<Duyurular> DuyurularimiGetir(int UreticiID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

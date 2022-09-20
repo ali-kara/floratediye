@@ -1,17 +1,25 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using Entities.Concrete;
+using Entities.Log.Concrete;
 using Entities.Log.Enums;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.VisualBasic;
+using Web.Tools;
 
 namespace Web.Controllers
 {
     public class BireyselController : Controller
     {
         IUreticiOdemelerService ureticiOdemelerService;
-        public BireyselController(IUreticiOdemelerService ureticiOdemelerService)
+
+        IDuyurularService duyurularService;
+
+        public BireyselController(IUreticiOdemelerService ureticiOdemelerService, IDuyurularService duyurularService)
         {
             this.ureticiOdemelerService = ureticiOdemelerService;
+            this.duyurularService = duyurularService;
         }
 
         public ActionResult Odemelerim()
@@ -46,6 +54,21 @@ namespace Web.Controllers
         public ActionResult Profil()
         {
             return View(/*CurrentSession.Uretici*/);
+        }
+
+        public ActionResult SignOut()
+        {
+            //CurrentSession.Clear();
+
+            return RedirectToAction("Giris", "Bireysel");
+        }
+
+        public IActionResult Duyurularım()
+        {
+            List<Duyurular> list = duyurularService.DuyurularimiGetir(575);
+
+
+            return View();
         }
     }
 }

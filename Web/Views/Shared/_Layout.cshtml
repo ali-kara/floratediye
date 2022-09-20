@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +16,10 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
     <!-- Vendor CSS Files -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
@@ -23,9 +27,9 @@
     @*<link href="~/lib/glightbox/css/glightbox.min.css" rel="stylesheet" />
         <link href="~/lib/remixicon/remixicon.css" rel="stylesheet" />*@
     <link href="~/lib/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
 
-    <link href="~/css/style.css" rel="stylesheet" />
-    <link href="~/css/generalStyle.css" rel="stylesheet" />
+
 
 </head>
 
@@ -37,14 +41,14 @@
 
             <div class="row justify-content-center">
                 <div class="col-xl-9 d-flex align-items-center justify-content-lg-between">
-                    <h1 class="logo me-auto me-lg-0"><a href="index.html">floratediye.com</a></h1>
+                    <h1 class="logo me-auto me-lg-0"><a href="/Home/Index">floratediye.com</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="https://floratediye.com/Resimler/icon.ico" alt="" class="img-fluid"></a> -->
 
                     <nav id="navbar" class="navbar order-last order-lg-0">
                         <ul>
-                            <li><a class="nav-link scrollto " href="#hero">Ana Ekran</a></li>
-                            <li><a class="nav-link scrollto" href="#about">About</a></li>
+                            <li><a class="nav-link" href="/Bireysel/Odemelerim">Ödemelerim</a></li>
+                            <li><a class="nav-link" href="/Home/Subeler">Şubeler</a></li>
                             <li class="dropdown">
                                 <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
@@ -60,7 +64,6 @@
                                     <li><a href="#">Drop Down 4</a></li>
                                 </ul>
                             </li>
-                            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                         </ul>
                         <i class="bi bi-list mobile-nav-toggle"></i>
                     </nav><!-- .navbar -->
@@ -116,6 +119,11 @@
     <script src="~/js/main.js"></script>
 
 
+
     @await RenderSectionAsync("Scripts", required: false)
+
+
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/generalStyle.css" rel="stylesheet" />
 </body>
 </html>

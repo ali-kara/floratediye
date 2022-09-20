@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<URETICI_ODEMELER2>
 
 
+<h2>Ödemelerim</h2>
+
+
 
 @Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
 
 
-
+<br />
+<br />
 
 @if (!Model.Any())
 {

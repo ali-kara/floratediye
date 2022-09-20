@@ -10,5 +10,6 @@ namespace Business.Abstract
     public interface IUreticiKayitService
     {
         List<ur_toplam> Getir(int URETICI_ID, DateTime dateBaslangic, DateTime dateBitis);
+
     }
 }

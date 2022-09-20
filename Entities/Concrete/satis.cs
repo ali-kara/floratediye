@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Entities.Abstract;
 
 namespace Entities.Concrete
 {
-    public class satis
+    public class satis : IEntity
     {
         public int id { get; set; }
 

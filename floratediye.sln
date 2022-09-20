@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.NBS", "DataAcces
 		{4A01DE63-2F51-41D6-ACE1-D5CD279FD373} = {4A01DE63-2F51-41D6-ACE1-D5CD279FD373}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Web", "Core.Web\Core.Web.csproj", "{5EE204D1-A743-45EF-A6D6-65973D7766DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{5E50D1EA-8952-4B9A-892A-22C5C1368974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E50D1EA-8952-4B9A-892A-22C5C1368974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E50D1EA-8952-4B9A-892A-22C5C1368974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE204D1-A743-45EF-A6D6-65973D7766DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE204D1-A743-45EF-A6D6-65973D7766DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE204D1-A743-45EF-A6D6-65973D7766DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE204D1-A743-45EF-A6D6-65973D7766DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

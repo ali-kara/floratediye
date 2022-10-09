@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Duyurular>
+
+
+<h2>Duyurular</h2>
+
+
+<p>
+    @Html.ActionLink("Yeni Duyuru", "Yeni", null, new { @class = "btn-lg btn-success" })
+</p>
+
+<br />
+<br />
+
+<table class="table table-responsive table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Baslik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mesaj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BitisTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnayGerekir)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HerkeseMi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bolge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsExpired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OlusturmaTarihi)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Baslik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mesaj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BitisTarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnayGerekir)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HerkeseMi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bolge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsExpired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OlusturmaTarihi)
+                </td>
+                <td>
+                    @if (!item.OnayGerekir)
+                    {
+                        @Html.ActionLink("Düzenle", "Duzenle", new { id = item.DuyuruID }, new { @class = "btn btn-success" })
+                    }
+
+                    @Html.ActionLink("Sil", "Sil", new { id = item.DuyuruID }, new { @class = "btn btn-danger" })
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

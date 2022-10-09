@@ -1,0 +1,74 @@
+﻿@model IEnumerable<satis>
+
+<h2>Kayıt Detay</h2>
+
+<p>
+    @Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-responsive table-bordered  table-striped">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cic_adi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cic_adet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cic_demet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.alici_kodu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.toplam_tutar)
+            </th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cic_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cic_adet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cic_demet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alici_kodu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.toplam_tutar)
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td>
+            </td>
+            <td>
+                @Model.Sum(x => x.cic_adet)
+            </td>
+            <td>
+                @Model.Sum(x => x.cic_demet)
+            </td>
+            <td>
+                @*@Model.Sum(x => x.KALEM_NO)*@
+            </td>
+            <td>
+                @Model.Sum(x => x.toplam_tutar)
+            </td>
+        </tr>
+    </tbody>
+</table>

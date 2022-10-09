@@ -1,0 +1,295 @@
+﻿@model IEnumerable<SubeSatis>
+
+@{
+    URETICILER ureticiler = new URETICILER();
+
+    ureticiler.Yetki = "ADMIN";
+
+    string ToplamTutar = "";
+    string Ortalama = "";
+}
+
+<h2>Mezatlar</h2>
+
+
+@Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
+
+
+@*<div class="col-xs-12 col-md-6 col-md-offset-3">*@
+<div>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.SubeKisaAdi)
+                </th>
+
+                @if (ureticiler.Yetki != "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </th>
+                }
+
+                @if (ureticiler.Yetki == "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.MusteriSayisi)
+                    </th>
+                    <th>
+                        Toplam Koli Sayısı
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KalanKoliSayisi)
+                    </th>
+                    <th>
+                        Koli Ortalaması
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToplamTutar)
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (!item.SubeKisaAdi.ToUpper().EndsWith("IH") && !item.SubeKisaAdi.ToUpper().EndsWith("TP"))
+                {
+
+                    <tr style='background-color: @(item.ToplamKoliSayisi == 0 ? "red" : "white");'>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubeKisaAdi)
+                        </td>
+
+                        @if (ureticiler.Yetki != "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aciklama)
+                            </td>
+                        }
+
+
+                        @if (ureticiler.Yetki == "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MusteriSayisi)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToplamKoliSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KalanKoliSayisi)
+                            </td>
+                            <td>
+                                @{
+                                    Ortalama = item.Ortalama.Value.ToCurrency();
+                                }
+                                @Html.DisplayFor(modelItem => Ortalama)
+                            </td>
+                            <td>
+                                @{
+                                    ToplamTutar = item.ToplamTutar.Value.ToCurrency();
+                                }
+                                @Html.DisplayFor(modelItem => ToplamTutar)
+                            </td>
+                            
+                        }
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+
+
+
+    @*İhracat Mezatı*@
+    <h3>İhracat</h3>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.SubeKisaAdi)
+                </th>
+
+                @if (ureticiler.Yetki != "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </th>
+                }
+
+                @if (ureticiler.Yetki == "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.MusteriSayisi)
+                    </th>
+                    <th>
+                        Toplam Dal Sayısı
+                    </th>
+                    <th>
+                        Kalan Dal Sayısı
+                    </th>
+                    <th>
+                        Dal Ortalaması
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToplamTutar)
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                if (item.SubeKisaAdi.ToUpper().EndsWith("IH"))
+                {
+
+                    <tr style='background-color: @(item.ToplamKoliSayisi == 0 ? "red" : "white");'>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubeKisaAdi)
+                        </td>
+
+                        @if (ureticiler.Yetki != "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aciklama)
+                            </td>
+                        }
+
+
+                        @if (ureticiler.Yetki == "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MusteriSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToplamKoliSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KalanKoliSayisi)
+                            </td>
+                            <td>
+                                @{
+                                    Ortalama = item.Ortalama.Value.ToCurrency();
+
+                                }
+                                @Html.DisplayFor(modelItem => Ortalama)
+                            </td>
+                            <td>
+                                @{
+                                    ToplamTutar = item.ToplamTutar.Value.ToCurrency();
+                                }
+                                @Html.DisplayFor(modelItem => ToplamTutar)
+                            </td>
+
+                        }
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+
+    @*Toptan Mezat*@
+    <h3>Toptan</h3>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.SubeKisaAdi)
+                </th>
+
+                @if (ureticiler.Yetki != "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </th>
+                }
+
+                @if (ureticiler.Yetki == "ADMIN")
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.MusteriSayisi)
+                    </th>
+                    <th>
+                        Toplam Demet Sayısı
+                    </th>
+                    <th>
+                        Kalan Demet Sayısı
+                    </th>
+                    <th>
+                        Demet Ortalaması
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToplamTutar)
+                    </th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.SubeKisaAdi.EndsWith("TP"))
+                {
+                    <tr style='background-color: @(item.ToplamKoliSayisi == 0 ? "red" : "white");'>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubeKisaAdi)
+                        </td>
+
+                        @if (ureticiler.Yetki != "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aciklama)
+                            </td>
+                        }
+
+
+                        @if (ureticiler.Yetki == "ADMIN")
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MusteriSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ToplamKoliSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KalanKoliSayisi)
+                            </td>
+                            <td>
+                                @{
+                                    Ortalama = item.Ortalama.Value.ToCurrency();
+                                }
+                                @Html.DisplayFor(modelItem => Ortalama)
+                            </td>
+                            <td>
+                                @{
+                                    ToplamTutar = item.ToplamTutar.Value.ToCurrency();
+                                }
+                                @Html.DisplayFor(modelItem => ToplamTutar)
+                            </td>
+
+                        }
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>

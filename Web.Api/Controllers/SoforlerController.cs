@@ -1,42 +1,40 @@
-﻿using Business.Abstract;
+﻿using System.Net;
+using Business.Abstract;
 using Business.Concrete;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTO;
 using Entities.Log.Concrete;
 using Entities.Log.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace Web.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SoforlerController : ControllerBase
     {
         readonly ISoforlerService soforlerService;
 
-        readonly IDuyurularService duyurularService;
-
-        public SoforlerController(ISoforlerService soforlerService, IDuyurularService duyurularService)
+        public SoforlerController(ISoforlerService soforlerService)
         {
             this.soforlerService = soforlerService;
-            this.duyurularService = duyurularService;
         }
 
+        //[AllowAnonymous]
         [HttpGet("getall")]
-        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK,Type = typeof(List<Soforler>))]
         public IActionResult GetAll()
         {
-            var response = new ListDataResult<DuyurularDTO>();
+            var response = new ListDataResult<Soforler>();
 
             try
             {
-                //List<Soforler> list = soforlerService.GetAllDrivers();
-
-                var list = duyurularService.DuyurulariGetir();
-
+                List<Soforler> list = soforlerService.GetAllDrivers();
 
                 response.Data = list;
             }
@@ -82,7 +80,5 @@ namespace Web.Api.Controllers
             return Ok(response);
 
         }
-
-
     }
 }

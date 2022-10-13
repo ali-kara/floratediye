@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiveTradeSystem.Entities.Concrete
+namespace TradeEntities
 {
     [Table("Alicilar")]
     public class Alicilar

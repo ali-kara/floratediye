@@ -6,6 +6,7 @@ using Entities.Log.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.VisualBasic;
+using Web.Tools;
 
 namespace Web.Controllers
 {

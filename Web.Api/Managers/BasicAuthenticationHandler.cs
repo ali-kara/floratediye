@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace Web.Api.Managers
+namespace Web.Managers
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
@@ -66,5 +66,5 @@ namespace Web.Api.Managers
         }
     }
 
-
+    
 }

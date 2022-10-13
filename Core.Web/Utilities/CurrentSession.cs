@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Core.Entities.Concrete;
 using Entities.Concrete;
 
-namespace Core.Web.Utilities
+namespace Web.Tools
 {
 
     public enum SessionKeys
@@ -93,7 +93,7 @@ namespace Core.Web.Utilities
                 //    date = DateTime.Now;
                 //}
 
-
+                
 
                 return date;
             }
@@ -124,7 +124,7 @@ namespace Core.Web.Utilities
             //    return (T)HttpContext.Session[key.ToString()];
             //}
 
-            return default;
+            return default(T);
         }
 
         public void Remove(SessionKeys key)

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LiveTradeSystem.Entities.Concrete
+namespace TradeEntities
 {
     public class Satis
     {
@@ -26,7 +26,7 @@ namespace LiveTradeSystem.Entities.Concrete
         public int? UreticiKodu { get; set; }
         public int? AliciSandalye { get; set; }
         public int? AliciKodu { get; set; }
-
+        
         [StringLength(5)]
         public string? FaturaYaz { get; set; }
         public int? S_SNo { get; set; }

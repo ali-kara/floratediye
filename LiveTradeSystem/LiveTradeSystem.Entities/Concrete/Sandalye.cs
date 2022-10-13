@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TradeEntities
+namespace LiveTradeSystem.Entities.Concrete
 {
     [Table("Sandalye")]
     public class Sandalye
@@ -15,7 +15,7 @@ namespace TradeEntities
         public int Id { get; set; }
 
         public int? AliciCariKodu { get; set; }
-        
+
         [StringLength(50)]
         public string? AliciAdi { get; set; }
         public bool IsActive { get; set; }

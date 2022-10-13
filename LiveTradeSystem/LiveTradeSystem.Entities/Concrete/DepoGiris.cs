@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TradeEntities
+namespace LiveTradeSystem.Entities.Concrete
 {
     [Table("DepoGiris")]
     public class DepoGiris
@@ -37,7 +37,7 @@ namespace TradeEntities
 
         public int? D_SiraNo { get; set; }
 
-        
+
         [StringLength(20)]
         public string? Nakliyeci { get; set; }
 

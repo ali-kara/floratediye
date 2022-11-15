@@ -12,19 +12,24 @@ namespace Web.Controllers
 {
     public class BireyselController : Controller
     {
-        IUreticiOdemelerService ureticiOdemelerService;
+        readonly IUreticiOdemelerService ureticiOdemelerService;
 
-        IDuyurularService duyurularService;
+        readonly IDuyurularService duyurularService;
 
-        public BireyselController(IUreticiOdemelerService ureticiOdemelerService, IDuyurularService duyurularService)
+        readonly IUreticilerService ureticilerService;
+
+        public BireyselController(IUreticiOdemelerService ureticiOdemelerService, IDuyurularService duyurularService, IUreticilerService ureticilerService)
         {
             this.ureticiOdemelerService = ureticiOdemelerService;
             this.duyurularService = duyurularService;
+            this.ureticilerService = ureticilerService;
         }
 
-        public ActionResult Odemelerim()
+        public IActionResult Odemelerim()
         {
             List<URETICI_ODEMELER2> Model = ureticiOdemelerService.UreticiOdemeGetir(575);
+
+
 
             return View(Model);
         }
@@ -35,28 +40,64 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Giris(string User, string Password)
+        public IActionResult Giris(string userfield, string passwordfield)
         {
-            TempData["user"] = User;
-            URETICILER uretici;
-
-            if (User == string.Empty || Password == string.Empty)
+            if (String.IsNullOrEmpty(userfield) || String.IsNullOrEmpty(passwordfield))
             {
-                ViewBag.Result = "Kullanıcı Adı veya Şifre Boş Olamaz.";
-                ViewBag.Status = "danger";
+                //return Json(new JsonResult { Success = false, Message = "Kullanıcı adı veya Parola Boş Olamaz.", RoutePath = "/Admin/Index" });
+                return Json(new { success = false, responseText = "Kullanıcı adı veya Parola Boş Olamaz.", routelink = "ada" });
 
-                return View();
             }
 
-            return RedirectToAction("Index", "UreticiKayit");
+
+            return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok." });
+
+
+            //var uretici = ureticilerService.Login(userfield, passwordfield);
+
+            //if (uretici == null)
+            //{
+            //    return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok." });
+            //}
+
+            //if (userfield == "yuskan" && passwordfield == "Yuskan2085@")
+            //{
+            //    //CurrentSession.Set(SessionKeys.Kullanici, UserType.Admin);
+            //    //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+
+            //    return RedirectToAction("Index", "Admin");
+            //}
+            //else if (userfield == "FLORA" && passwordfield == "1945")
+            //{
+            //    //CurrentSession.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+            //    //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+
+            //    return RedirectToAction("Index", "Duyurular");
+            //}
+
+
+
+
+
+            //TempData["user"] = User;
+
+            //return RedirectToAction("Index", "UreticiKayit");
         }
 
-        public ActionResult Profil()
+
+
+
+
+
+
+
+
+        public IActionResult Profil()
         {
             return View(/*CurrentSession.Uretici*/);
         }
 
-        public ActionResult SignOut()
+        public IActionResult SignOut()
         {
             //CurrentSession.Clear();
 
@@ -71,4 +112,14 @@ namespace Web.Controllers
             return View();
         }
     }
+}
+
+
+
+public class JsonResult
+{
+    public bool Success { get; set; }
+    public string? Message { get; set; }
+    public string? RoutePath { get; set; }
+
 }

@@ -16,7 +16,7 @@ namespace Entities.Concrete
         public string? SubeAdi { get; set; }
 
         [StringLength(10)]
-        [DisplayName("Şube")]
+        [DisplayName("Åube")]
         public string? SubeKisaAdi { get; set; }
 
         [DisplayName("Toplam Tutar")]
@@ -25,16 +25,16 @@ namespace Entities.Concrete
         [DisplayName("Ortalama")]
         public decimal? Ortalama { get; set; }
 
-        [DisplayName("Toplam Koli Sayısı")]
+        [DisplayName("Toplam Koli SayÄ±sÄ±")]
         public int? ToplamKoliSayisi { get; set; }
 
-        [DisplayName("Satılan Koli Sayısı")]
+        [DisplayName("SatÄ±lan Koli SayÄ±sÄ±")]
         public int? SatilanKoliSayisi { get; set; }
 
-        [DisplayName("Kalan Koli Sayısı")]
+        [DisplayName("Kalan Koli SayÄ±sÄ±")]
         public int? KalanKoliSayisi { get; set; }
 
-        [DisplayName("Müşteri Sayısı")]
+        [DisplayName("MÃ¼ÅŸteri SayÄ±sÄ±")]
         public int? MusteriSayisi { get; set; }
 
         [DisplayName("Tarih")]
@@ -42,7 +42,7 @@ namespace Entities.Concrete
         public DateTime? Tarih { get; set; }
 
         [StringLength(250)]
-        [DisplayName("Açıklama")]
+        [DisplayName("AÃ§Ä±klama")]
         public string? Aciklama { get; set; }
     }
 }

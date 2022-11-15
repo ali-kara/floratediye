@@ -48,6 +48,7 @@ namespace Web.Api.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login(SoforLoginDTO soforLoginDTO)
         {

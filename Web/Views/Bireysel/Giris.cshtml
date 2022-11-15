@@ -18,6 +18,7 @@
     button {
         width: 500px;
     }
+
     .main-content {
         border: 2px solid #009edf;
         margin: 0 auto;
@@ -40,8 +41,7 @@
 </style>
 
 
-@using (Html.BeginForm())
-{
+
     @Html.AntiForgeryToken()
 
 
@@ -74,26 +74,119 @@
             <br />
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-circle"> </i> </span>
-                <input class="form-control" placeholder="Kullanıcı Adınız" name="User" />
+                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-circle"></i></span>
+                <input class="form-control" placeholder="Kullanıcı Adınız" name="userfield" />
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2"> <i class="bi bi-lock-fill"> </i> </span>
-                <input class="form-control" type="password" placeholder="Parolanız" name="Password" />
+                <span class="input-group-text" id="basic-addon2"> <i class="bi bi-lock-fill"></i></span>
+                <input class="form-control" type="password" placeholder="Parolanız" name="passwordfield" />
             </div>
 
 
             <div class="input-group">
-                <button type="submit" class="btn btn-danger btn-lg">Onay</button>
+                <button class="btn btn-danger btn-lg" id="btnGiris" name="btnGiris">Onay</button>
             </div>
 
             <br />
 
             <div class="input-group">
                 <h4> Sistemde görünen kayıtlar bilgilendirme amaçlı olup, anlaşmazlık durumunda kooperatif kayıtları geçerlidir.</h4>
-            </div>
+            </div>  
 
         </div>
     </div>
 
-}
+
+
+<script>$(document).on({
+        ajaxStart: function () {
+            $("body").addClass("loading");
+        },
+        ajaxStop: function () {
+            $("body").removeClass("loading");
+        }
+    });</script>
+
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "1000",
+        "hideDuration": "1500",
+        "timeOut": "6000",
+        "extendedTimeOut": "7000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    $('#btnGiris').click(function () {
+        Login();
+    });
+
+
+    function Login() {
+
+        $.ajax({
+            //contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: 'POST',
+            url: '@Url.Action("Giris", "Bireysel")',
+            data: {
+                userfield: $("#userfield").val(),
+                passwordfield: $("#passwordfield").val()
+            },
+            
+
+            success: function (response) {
+
+
+                toastr.info(response.routelink);
+
+                if (response.success) {
+                    toastr.success(response.responseText, "Başarılı");
+                    window.location = "/Home/Index/";
+
+                }
+                else {
+                    toastr.error(response.responseText, "Hata");
+
+                }
+            },
+            error: function (data) {
+                toastr.error(data.responseText, "Hataaaa");
+            },
+
+        });
+    }
+
+</script>
+
+<style>
+    .overlay {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        background: rgba(255,255,255,0.8) url("/login/ajax-loader.gif") center no-repeat;
+    }
+
+
+    /* Turn off scrollbar when body element has the loading class */
+    body.loading {
+        overflow: hidden;
+    }
+        /* Make spinner image visible when body element has the loading class */
+        body.loading .overlay {
+            display: block;
+        }
+</style>

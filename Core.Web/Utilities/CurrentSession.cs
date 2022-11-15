@@ -1,10 +1,26 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 
 namespace Web.Tools
 {
+
+    class CurrentSession2
+    {
+        IHttpContextAccessor httpContext;
+
+        public CurrentSession2(IHttpContextAccessor httpContext)
+        {
+            this.httpContext = httpContext;
+
+            //httpContext.HttpContext.Session.
+
+        }
+    }
+
 
     public enum SessionKeys
     {
@@ -131,7 +147,7 @@ namespace Web.Tools
         {
             //if (HttpContext.Session[key.ToString()] != null)
             //{
-            //    HttpContext.Session.Remove(key.ToString());
+            //   HttpContext.Session.Remove(key.ToString());
             //}
         }
 

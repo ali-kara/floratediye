@@ -35,7 +35,7 @@ namespace DataAccess
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=XX.XX.XX.XX;Database=UreticiTakipDB_test;User ID=XX;Password=XX;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=89.252.137.24;Database=UreticiTakipDB_test;User ID=sa;Password=Yuskan2085@;MultipleActiveResultSets=true");
             }
         }
 

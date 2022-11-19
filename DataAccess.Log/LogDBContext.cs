@@ -13,7 +13,7 @@ namespace DataAccess.Log
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=XX.XX.XX.XX;Database=UreticiLogDB2;User ID=XX;Password=XX;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Server=89.252.137.24;Database=UreticiLogDB2;User ID=sa;Password=Yuskan2085@;MultipleActiveResultSets=true");
         }
 
 

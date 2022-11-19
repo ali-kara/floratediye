@@ -59,7 +59,8 @@ namespace Business.Concrete
          DateTime.Now.Date)
           ).ToList();
 
-            return null;
+
+            return new List<DuyurularDTO>();
         }
 
         public List<Duyurular> DuyurularimiGetir(URETICILER Uretici)

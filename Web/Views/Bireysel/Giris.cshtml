@@ -48,11 +48,7 @@
 
 
     <div class="row main">
-
-
         <div class="main-content">
-
-
             @Html.ValidationSummary(false)
 
 
@@ -75,11 +71,11 @@
 
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person-circle"></i></span>
-                <input class="form-control" placeholder="Kullanıcı Adınız" name="userfield" />
+                <input class="form-control" placeholder="Kullanıcı Adınız" id="userfield" name="userfield" />
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2"> <i class="bi bi-lock-fill"></i></span>
-                <input class="form-control" type="password" placeholder="Parolanız" name="passwordfield" />
+            <input class="form-control" type="password" placeholder="Parolanız" id="passwordfield" name="passwordfield" />
             </div>
 
 
@@ -133,7 +129,7 @@
 
     function Login() {
 
-        $.ajax({
+       $.ajax({
             //contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: 'POST',
@@ -151,7 +147,8 @@
 
                 if (response.success) {
                     toastr.success(response.responseText, "Başarılı");
-                    window.location = "/Home/Index/";
+                   
+                    window.location = response.routelink;
 
                 }
                 else {

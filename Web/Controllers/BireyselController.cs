@@ -44,44 +44,35 @@ namespace Web.Controllers
         {
             if (String.IsNullOrEmpty(userfield) || String.IsNullOrEmpty(passwordfield))
             {
-                //return Json(new JsonResult { Success = false, Message = "Kullanıcı adı veya Parola Boş Olamaz.", RoutePath = "/Admin/Index" });
-                return Json(new { success = false, responseText = "Kullanıcı adı veya Parola Boş Olamaz.", routelink = "ada" });
-
+                return Json(new { success = false, responseText = "Kullanıcı adı veya Parola Boş Olamaz.", routelink = "" });
             }
 
 
-            return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok." });
 
+            if (userfield == "yuskan" && passwordfield == "Yuskan2085@")
+            {
+                //CurrentSession.Set(SessionKeys.Kullanici, UserType.Admin);
+                //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
 
-            //var uretici = ureticilerService.Login(userfield, passwordfield);
+                return Json(new { success = true, responseText = "", routelink = "/Admin/Index" });
+            }
+            else if (userfield == "FLORA" && passwordfield == "1945")
+            {
+                //CurrentSession.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+                //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
 
-            //if (uretici == null)
-            //{
-            //    return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok." });
-            //}
+                return Json(new { success = true, responseText = "", routelink = "/Duyurular/Index" });
+            }
 
-            //if (userfield == "yuskan" && passwordfield == "Yuskan2085@")
-            //{
-            //    //CurrentSession.Set(SessionKeys.Kullanici, UserType.Admin);
-            //    //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+            var uretici = ureticilerService.Login(userfield, passwordfield);
 
-            //    return RedirectToAction("Index", "Admin");
-            //}
-            //else if (userfield == "FLORA" && passwordfield == "1945")
-            //{
-            //    //CurrentSession.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
-            //    //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+            if (uretici == null)
+            {
+                return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "" });
+            }
 
-            //    return RedirectToAction("Index", "Duyurular");
-            //}
+            return Json(new { success = true, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "/UreticiKayit/Index" });
 
-
-
-
-
-            //TempData["user"] = User;
-
-            //return RedirectToAction("Index", "UreticiKayit");
         }
 
 
@@ -116,8 +107,15 @@ namespace Web.Controllers
 
 
 
-public class JsonResult
+public class Json_Result
 {
+    public Json_Result(bool success, string? message, string? routePath)
+    {
+        Success = success;
+        Message = message;
+        RoutePath = routePath;
+    }
+
     public bool Success { get; set; }
     public string? Message { get; set; }
     public string? RoutePath { get; set; }

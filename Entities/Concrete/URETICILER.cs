@@ -13,43 +13,43 @@ namespace Entities.Concrete
 
         [Required]
         [StringLength(50)]
-        public string URETICI_NO { get; set; }
+        public string? URETICI_NO { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string ADI { get; set; }
+        public string? ADI { get; set; }
 
         [StringLength(50)]
-        public string SOYADI { get; set; }
+        public string? SOYADI { get; set; }
 
         [Required]
         [StringLength(11)]
-        public string TCKIMLIK_NO { get; set; }
+        public string? TCKIMLIK_NO { get; set; }
 
         public DateTime? DOGUM_TARIHI { get; set; }
 
         [StringLength(50)]
-        public string DOGUM_YERI { get; set; }
+        public string? DOGUM_YERI { get; set; }
 
         [StringLength(20)]
-        public string CEP_TELEFONU { get; set; }
+        public string? CEP_TELEFONU { get; set; }
 
         [StringLength(100)]
-        public string EMAIL { get; set; }
+        public string? EMAIL { get; set; }
 
         [StringLength(30)]
-        public string IL { get; set; }
+        public string? IL { get; set; }
 
         [StringLength(200)]
-        public string ADRES { get; set; }
+        public string? ADRES { get; set; }
 
         [StringLength(50)]
-        public string BAGKUR_NO { get; set; }
+        public string? BAGKUR_NO { get; set; }
 
         [StringLength(10)]
-        public string Yetki { get; set; }
+        public string? Yetki { get; set; }
 
         [StringLength(10)]
-        public string Parola { get; set; }
+        public string? Parola { get; set; }
     }
 }

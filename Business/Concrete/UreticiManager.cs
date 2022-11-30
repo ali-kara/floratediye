@@ -21,10 +21,16 @@ namespace Business.Concrete
             return uretici;
         }
 
-        public URETICILER Login(string URETICI_NO, string Parola)
+        public URETICILER Login(string UreticiNo, string Parola)
         {
-            URETICILER uretici = ureticilerDAL.Get(x => x.URETICI_NO == URETICI_NO && x.Parola == Parola);
+            URETICILER uretici = ureticilerDAL.Get(x => x.URETICI_NO == UreticiNo && x.Parola == Parola);
             return uretici;
+        }
+
+        public URETICILER LoginByUserName(string UreticiNo)
+        {
+            URETICILER u = ureticilerDAL.Get(x => x.URETICI_NO == UreticiNo);
+            return u;
         }
 
         public List<URETICILER> UreticileriSehreGoreGetir(string Sehir)

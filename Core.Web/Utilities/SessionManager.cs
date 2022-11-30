@@ -1,159 +1,99 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
-using Core.Entities.Concrete;
-using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Web.Tools
 {
+    // Static methods with interface problem
 
-    class CurrentSession2
+    public interface ISessionManager
     {
-        IHttpContextAccessor httpContext;
-
-        public CurrentSession2(IHttpContextAccessor httpContext)
-        {
-            this.httpContext = httpContext;
-
-            //httpContext.HttpContext.Session.
-
-        }
+        public static void SetHttpContextAccessor(IHttpContextAccessor accessor) => throw new NotImplementedException();
+        public static void Set(string key, object obj) => throw new NotImplementedException();
+        public static object? Get(string key) => throw new NotImplementedException();
+        static T? Get<T>(string key) => throw new NotImplementedException();
+        static void Remove(string key) => throw new NotImplementedException();
+        static void Clear() => throw new NotImplementedException();
+        void Deneme();
     }
 
-
-    public enum SessionKeys
+    public class SessionManager : ISessionManager
     {
-        UreticiId,
-        Uretici,
-        Kullanici,
-        FilterDate_Start,
-        FilterDate_End,
-        UreticiOdemeler,
-        SecilenYil,
-        Sofor,
-        SoforKodu,
-        NakliyeBolge,
-        NakliyePlaka,
-        Exception,
-        Admin,
-        MezatGorevlisi
-    }
-
-
-    public abstract class CurrentSession
-    {
-        public URETICILER Uretici
+        void ISessionManager.Deneme()
         {
-            get
-            {
-                URETICILER a = Get<URETICILER>(SessionKeys.Uretici);
-
-                if (a == default(URETICILER))
-                {
-                    return null;
-                }
-                else
-                {
-                    return a;
-                }
-            }
+            throw new NotImplementedException();
         }
 
-        public int UreticiID
-        {
-            get
-            {
-                URETICILER Uretici = Get<URETICILER>(SessionKeys.Uretici);
+        private static IHttpContextAccessor? _httpContextAccessor;
+        private static ISession? _session;
 
-                if (Uretici == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return Uretici.URETICI_ID;
-                }
-            }
+        public static void SetHttpContextAccessor(IHttpContextAccessor accessor)
+        {
+            _httpContextAccessor = accessor;
         }
 
-
-
-
-        public DateTime FilterDate_Start
+        public static void Set(string key, object obj)
         {
-            get
-            {
-                DateTime date = (DateTime)Get(SessionKeys.FilterDate_Start);
+            _session = _httpContextAccessor?.HttpContext?.Session;
 
-
-                // Normal görüntülemede kontrol amaçlı idi ama gecmiş kayıtlar problem çıkardı.
-                //if (date.Year != DateTime.Now.Year)
-                //{
-                //    date = DateTime.Now;
-                //}
-
-                return date;
-            }
+            _session?.SetString(key.ToString(), obj.ToString());
         }
 
-        public DateTime FilterDate_End
+        //public static void Set<T>(SessionKeys key, T obj)
+        //{
+        //    _session = _httpContextAccessor.HttpContext?.Session;
+
+
+        //    if (_session != null)
+        //    {
+        //        var str = JsonConvert.SerializeObject(obj);
+        //        _session.SetString(key.ToString(), str);
+        //    }
+        //}
+
+        public static object? Get(string key)
         {
-            get
-            {
-                DateTime date = (DateTime)Get(SessionKeys.FilterDate_End);
+            _session = _httpContextAccessor?.HttpContext?.Session;
 
-                // Normal görüntülemede kontrol amaçlı idi ama gecmiş kayıtlar problem çıkardı.
-                //if (date.Year != DateTime.Now.Year)
-                //{
-                //    date = DateTime.Now;
-                //}
+            var obj = _session?.GetString(key.ToString());
 
-                
-
-                return date;
-            }
-        }
-
-        //private static HttpContext _httpContext => new HttpContextAccessor().HttpContext;
-
-
-        public void Set<T>(SessionKeys key, T obj)
-        {
-            //_httpContext.Session.Set(key.ToString(),obj);
-        }
-
-        public object? Get(SessionKeys key)
-        {
-            //if (_httpContext[key.ToString()] != null)
+            //if (obj != null)
             //{
-            //    return HttpContext.Session[key.ToString()];
+            //    return _session?.Get(key.ToString());
             //}
 
-            return null;
+            return obj.ToString();
         }
 
-        public T? Get<T>(SessionKeys key)
+        public static T? Get<T>(string key)
         {
-            //if (HttpContext.Session[key.ToString()] != null)
-            //{
-            //    return (T)HttpContext.Session[key.ToString()];
-            //}
+            _session = _httpContextAccessor?.HttpContext?.Session;
+
+            var obj = _session?.Get(key.ToString());
+
+            if (obj != null)
+            {
+                var TObject = JsonConvert.DeserializeObject<T>(key.ToString());
+
+                return TObject;
+            }
 
             return default(T);
         }
 
-        public void Remove(SessionKeys key)
+        public static void Remove(string key)
         {
-            //if (HttpContext.Session[key.ToString()] != null)
-            //{
-            //   HttpContext.Session.Remove(key.ToString());
-            //}
+            _session = _httpContextAccessor?.HttpContext?.Session;
+
+            _session?.Remove(key.ToString());
         }
 
-        public void Clear()
+        public static void Clear()
         {
-            //HttpContext.Current.Session.Clear();
+            _session = _httpContextAccessor?.HttpContext?.Session;
+
+            _session?.Clear();
         }
+
+
     }
 }

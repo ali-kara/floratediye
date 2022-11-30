@@ -8,7 +8,9 @@ namespace Business.Abstract
         List<URETICILER> UreticileriSehreGoreGetir(string Sehir);
         List<Country> UreticiSehirleriGetir();
 
-        URETICILER Login(string URETICI_NO, string Parola);
+        URETICILER Login(string ureticiNo, string Parola);
+        URETICILER LoginByUserName(string ureticiNo);
+
         URETICILER GetById(string URETICI_NO);
 
     }

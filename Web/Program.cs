@@ -1,6 +1,9 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Web.Services;
+using Web.Tools;
 
 namespace Web;
 
@@ -10,14 +13,21 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+        builder.Services.AddTransient<ISessionManager, SessionManager>();
+
+
+
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         builder.Services.AddSession(options => {
             options.IdleTimeout = TimeSpan.FromMinutes(60);
         });
 
-        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
+
+        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacModule()));
 
 
@@ -31,12 +41,15 @@ public class Program
             app.UseHsts();
         }
 
+        var accessor = app.Services.GetService<IHttpContextAccessor>();
+        AuthManager.SetHttpContextAccessor(accessor);
+        WebSessionManager.SetHttpContextAccessor(accessor);
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.UseSession();
+
 
         app.UseAuthorization();
 

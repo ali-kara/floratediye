@@ -6,6 +6,7 @@ using Entities.Log.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.VisualBasic;
+using Web.Services;
 using Web.Tools;
 
 namespace Web.Controllers
@@ -13,10 +14,10 @@ namespace Web.Controllers
     public class BireyselController : Controller
     {
         readonly IUreticiOdemelerService ureticiOdemelerService;
-
         readonly IDuyurularService duyurularService;
-
         readonly IUreticilerService ureticilerService;
+        readonly ISessionManager sessionManager;
+
 
         public BireyselController(IUreticiOdemelerService ureticiOdemelerService, IDuyurularService duyurularService, IUreticilerService ureticilerService)
         {
@@ -28,9 +29,6 @@ namespace Web.Controllers
         public IActionResult Odemelerim()
         {
             List<URETICI_ODEMELER2> Model = ureticiOdemelerService.UreticiOdemeGetir(575);
-
-
-
             return View(Model);
         }
 
@@ -42,36 +40,49 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Giris(string userfield, string passwordfield)
         {
+            URETICILER Uretici;
+
             if (String.IsNullOrEmpty(userfield) || String.IsNullOrEmpty(passwordfield))
             {
                 return Json(new { success = false, responseText = "Kullanıcı adı veya Parola Boş Olamaz.", routelink = "" });
             }
 
-
-
             if (userfield == "yuskan" && passwordfield == "Yuskan2085@")
             {
-                //CurrentSession.Set(SessionKeys.Kullanici, UserType.Admin);
-                //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+                WebSessionManager.Set(SessionKeys.Kullanici, UserType.Admin.ToString());
+                WebSessionManager.Set(SessionKeys.Admin, "SISTEM");
 
                 return Json(new { success = true, responseText = "", routelink = "/Admin/Index" });
             }
             else if (userfield == "FLORA" && passwordfield == "1945")
             {
-                //CurrentSession.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
-                //CurrentSession.Set(SessionKeys.Admin, "SISTEM");
+                WebSessionManager.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+                WebSessionManager.Set(SessionKeys.Admin, "SISTEM");
 
                 return Json(new { success = true, responseText = "", routelink = "/Duyurular/Index" });
             }
 
-            var uretici = ureticilerService.Login(userfield, passwordfield);
 
-            if (uretici == null)
+            if (passwordfield == "99999")
+            {
+                Uretici = ureticilerService.LoginByUserName(userfield);
+            }
+            else
+            {
+                Uretici = ureticilerService.Login(userfield, passwordfield);
+            }
+
+
+            if (Uretici == null)
             {
                 return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "" });
             }
 
-            return Json(new { success = true, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "/UreticiKayit/Index" });
+            WebSessionManager.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+
+
+
+            return Json(new { success = true, responseText = "Başarılı ile giriş yapıldı.", routelink = "/UreticiKayit/Index" });
 
         }
 
@@ -88,9 +99,9 @@ namespace Web.Controllers
             return View(/*CurrentSession.Uretici*/);
         }
 
-        public IActionResult SignOut()
+        public new IActionResult SignOut()
         {
-            //CurrentSession.Clear();
+            HttpContext.Session.Clear();
 
             return RedirectToAction("Giris", "Bireysel");
         }

@@ -17,18 +17,18 @@ namespace DataAccess
 
 
 
-        public DbSet<AracPlakalar> AracPlakalar { get; set; } = null!;
-        public DbSet<Bolgeler> Bolgeler { get; set; } = null!;
-        public DbSet<cicek_bilgi> cicek_bilgi { get; set; } = null!;
-        public DbSet<NakliyeTombala> NakliyeTombala { get; set; } = null!;
-        public DbSet<rekolte> rekolte { get; set; } = null!;
-        public DbSet<Soforler> Soforler { get; set; } = null!;
-        public DbSet<Duyurular> Duyurular { get; set; } = null!;
-        public DbSet<SubeSatis> SubeSatis { get; set; } = null!;
-        public DbSet<ur_toplam> ur_toplam { get; set; } = null!;
-        public DbSet<URETICILER> Ureticiler { get; set; } = null!;
-        public DbSet<URETICI_ODEMELER2> UreticiOdemeler { get; set; } = null!;
-        public DbSet<satis> satis { get; set; } = null!;
+        public DbSet<AracPlakalar> AracPlakalar { get; set; }
+        public DbSet<Bolgeler> Bolgeler { get; set; }
+        public DbSet<cicek_bilgi> cicek_bilgi { get; set; }
+        public DbSet<NakliyeTombala> NakliyeTombala { get; set; }
+        public DbSet<rekolte> rekolte { get; set; }
+        public DbSet<Soforler> Soforler { get; set; }
+        public DbSet<Duyurular> Duyurular { get; set; }
+        public DbSet<SubeSatis> SubeSatis { get; set; }
+        public DbSet<ur_toplam> ur_toplam { get; set; }
+        public DbSet<URETICILER> Ureticiler { get; set; }
+        public DbSet<URETICI_ODEMELER2> UreticiOdemeler { get; set; }
+        public DbSet<satis> satis { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

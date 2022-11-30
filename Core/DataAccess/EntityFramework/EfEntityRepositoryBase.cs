@@ -51,7 +51,7 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+                return context.Set<TEntity>().First(filter);
             }
         }
         public IEnumerable<TEntity> GetIEnum(Expression<Func<TEntity, bool>>? filter = null)

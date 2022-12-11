@@ -19,9 +19,18 @@ public class Program
 
 
 
-        builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+        builder.Services.AddControllersWithViews()
+            .AddRazorRuntimeCompilation()
+            .AddJsonOptions(o => {
+                o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                o.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
 
-        builder.Services.AddSession(options => {
+
+
+
+        builder.Services.AddSession(options =>
+        {
             options.IdleTimeout = TimeSpan.FromMinutes(60);
         });
 

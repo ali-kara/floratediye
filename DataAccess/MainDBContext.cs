@@ -15,8 +15,6 @@ namespace DataAccess
         //{
         //}
 
-
-
         public DbSet<AracPlakalar> AracPlakalar { get; set; }
         public DbSet<Bolgeler> Bolgeler { get; set; }
         public DbSet<cicek_bilgi> cicek_bilgi { get; set; }

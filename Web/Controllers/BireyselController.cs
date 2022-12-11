@@ -79,7 +79,12 @@ namespace Web.Controllers
             }
 
             WebSessionManager.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+            WebSessionManager.Set(SessionKeys.FilterDate_Start, DateTime.Now);
+            WebSessionManager.Set(SessionKeys.FilterDate_End, DateTime.Today.Date);
 
+
+            var d1 = WebSessionManager.FilterDate_Start;
+            var d2 = WebSessionManager.Get(SessionKeys.FilterDate_End);
 
 
             return Json(new { success = true, responseText = "Başarılı ile giriş yapıldı.", routelink = "/UreticiKayit/Index" });

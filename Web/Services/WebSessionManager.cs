@@ -1,10 +1,47 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Services
 {
     public class WebSessionManager
     {
+
+        public static string FilterDate_Start
+        {
+            get
+            {
+                var date = Get(SessionKeys.FilterDate_Start);
+
+
+                DateTime d = Convert.ToDateTime(date);
+
+                return d.Date.ToString("dd.MM.yyyy");
+                //return string.Format("{0:dd.MM.yyyy}", date.ToString());
+            }
+        }
+
+        public static DateTime FilterDate_End
+        {
+            get
+            {
+                DateTime date = (DateTime)Get(SessionKeys.FilterDate_End);
+
+                // Normal görüntülemede kontrol amaçlı idi ama gecmiş kayıtlar problem çıkardı.
+                //if (date.Year != DateTime.Now.Year)
+                //{
+                //    date = DateTime.Now;
+                //}
+
+                return date;
+            }
+        }
+
+
+
+
+
+
         private static IHttpContextAccessor _httpContextAccessor;
         private static ISession _session;
 

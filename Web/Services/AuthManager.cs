@@ -15,6 +15,24 @@ namespace Web.Services
         }
 
 
+        public static string GetDate()
+        {
+            var HttpContext = httpContextAccessor.HttpContext;
+
+            var date = HttpContext.Session.GetString(SessionKeys.FilterDate_Start.ToString());
+
+
+            // Normal görüntülemede kontrol amaçlı idi ama gecmiş kayıtlar problem çıkardı.
+            //if (date.Year != DateTime.Now.Year)
+            //{
+            //    date = DateTime.Now;
+            //}
+
+            return string.Format("{0:dd.MM.yyyy}", date.ToString());
+        }
+
+    
+
         public static bool IsAuthenticated()
         {
             var HttpContext = httpContextAccessor.HttpContext;

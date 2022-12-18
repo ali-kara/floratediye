@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using Core.Entities.Abstract;
+using Core.Utilities.Results;
+using Core.Web.Utilities;
+using Entities.Concrete;
+using Entities.Log.Enums;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Services
 {
-    public class WebSessionManager
+    public abstract class WebSessionManager : IWebSessionManager
     {
 
         public static string FilterDate_Start
@@ -12,34 +17,24 @@ namespace Web.Services
             get
             {
                 var date = Get(SessionKeys.FilterDate_Start);
-
-
-                DateTime d = Convert.ToDateTime(date);
-
-                return d.Date.ToString("dd.MM.yyyy");
-                //return string.Format("{0:dd.MM.yyyy}", date.ToString());
+                return Convert.ToDateTime(date).Date.ToString("dd.MM.yyyy");
             }
         }
-
-        public static DateTime FilterDate_End
+        public static string FilterDate_End
         {
             get
             {
-                DateTime date = (DateTime)Get(SessionKeys.FilterDate_End);
-
-                // Normal görüntülemede kontrol amaçlı idi ama gecmiş kayıtlar problem çıkardı.
-                //if (date.Year != DateTime.Now.Year)
-                //{
-                //    date = DateTime.Now;
-                //}
-
-                return date;
+                var date = Get(SessionKeys.FilterDate_End);
+                return Convert.ToDateTime(date).Date.ToString("dd.MM.yyyy");
             }
         }
-
-
-
-
+        public static URETICILER Uretici
+        {
+            get
+            {
+                return Get<URETICILER>(SessionKeys.Uretici);
+            }
+        }
 
 
         private static IHttpContextAccessor _httpContextAccessor;
@@ -49,27 +44,24 @@ namespace Web.Services
         {
             _httpContextAccessor = accessor;
         }
-
-        public static void Set(SessionKeys key, object obj)
+        public static void Set(object key, object obj)
         {
             _session = _httpContextAccessor.HttpContext?.Session;
 
             _session?.SetString(key.ToString(), obj.ToString());
         }
+        public static void Set<T>(object key, T obj) where T : IEntity
+        {
+            _session = _httpContextAccessor.HttpContext?.Session;
 
-        //public static void Set<T>(SessionKeys key, T obj)
-        //{
-        //    _session = _httpContextAccessor.HttpContext?.Session;
 
-
-        //    if (_session != null)
-        //    {
-        //        var str = JsonConvert.SerializeObject(obj);
-        //        _session.SetString(key.ToString(), str);
-        //    }
-        //}
-
-        public static object? Get(SessionKeys key)
+            if (_session != null)
+            {
+                var str = JsonConvert.SerializeObject(obj);
+                _session.SetString(key.ToString(), str.ToString());
+            }
+        }
+        public static object? Get(object key)
         {
             _session = _httpContextAccessor.HttpContext?.Session;
 
@@ -82,36 +74,51 @@ namespace Web.Services
 
             return obj.ToString();
         }
-
-        public static T? Get<T>(SessionKeys key)
+        public static T? Get<T>(object key)
         {
             _session = _httpContextAccessor.HttpContext?.Session;
 
             var obj = _session?.Get(key.ToString());
+            var str = Encoding.Default.GetString(obj);
+
 
             if (obj != null)
             {
-                var TObject = JsonConvert.DeserializeObject<T>(key.ToString());
+                var TObject = JsonConvert.DeserializeObject<T>(str);
 
                 return TObject;
             }
 
             return default(T);
         }
-
-        public static void Remove(SessionKeys key)
+        public static void Remove(object key)
         {
             _session = _httpContextAccessor.HttpContext?.Session;
 
-            _session?.Remove(key.ToString());
+            _session.Remove(key.ToString());
         }
-
         public static void Clear()
         {
             _session = _httpContextAccessor.HttpContext?.Session;
+            if (_session != null)
+            {
+                _session.Clear();
 
-            _session?.Clear();
+            }
         }
     }
-}
 
+
+    public class Web : WebSessionManager
+    {
+        public static string FilterDate_Start
+        {
+            get
+            {
+                var date = Get(SessionKeys.FilterDate_Start);
+                return Convert.ToDateTime(date).Date.ToString("dd.MM.yyyy");
+            }
+        }
+
+    }
+}

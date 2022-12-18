@@ -1,7 +1,45 @@
-﻿@{
+﻿<style>
 
-}
+    .btn {
+        white-space: nowrap;
+        text-align: center;
+    }
+</style>
 
+<div class="container shadow py-3">
+    <div class="row">
+        <h4>@(WebSessionManager.Uretici.URETICI_NO + " - " + WebSessionManager.Uretici.ADI + " " + WebSessionManager.Uretici.SOYADI)</h4>
+
+        <br />
+
+
+        <div class="col-md-2 col">
+            <button type="submit" onclick="window.location.href='/Bireysel/Odemelerim'" class="btn btn-primary btn-block form-control">
+                Ödemelerim
+            </button>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="col-md-2 col">
+            <button type="submit" onclick="window.location.href='/Home/Subeler'" class="btn btn-primary btn-block form-control">
+                Mezatlar
+            </button>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="col-md-2 col">
+            <button type="submit" onclick="window.location.href='#'" class="btn btn-primary btn-block form-control">
+                Geçmiş Kayıtlarım
+            </button>
+        </div>
+
+
+    </div>
+</div>
 
 <div class="container shadow py-3">
     <div class="row">
@@ -25,7 +63,7 @@
 
         <div class="col-md-2 col">
             <div class="input-group date" id="datepickerBitis">
-                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBitis" name="datepickerBitis" value="@WebSessionManager.FilterDate_Start">
+                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBitis" name="datepickerBitis" value="@WebSessionManager.FilterDate_End">
                 <span style="padding: .375rem .75rem; background-color:lightgray;" class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
@@ -89,7 +127,7 @@
 
         GetUserRecords();
 
-});
+    });
 
     function GetUserRecords() {
 
@@ -120,37 +158,4 @@
 <br />
 
 <div id="list">
-
 </div>
-
-
-
-
-
-@*<div class="container shadow py-5 mb-3">
-        <div class="row justify-content-center">
-            <div class="col-lg-2 col-sm-6">
-                <label for="startDate">Start</label>
-                <input id="startDate" class="form-control" type="date" lang="tr" />
-                <span id="startDateSelected"></span>
-            </div>
-            <div class="col-lg-2 col-sm-6">
-                <label for="endDate">End</label>
-                <input id="endDate" class="form-control" type="date" lang="tr" />
-                <span id="endDateSelected"></span>
-            </div>
-        </div>
-    </div>*@
-
-@*<script>let startDate = document.getElementById('startDate')
-    let endDate = document.getElementById('endDate')
-
-    startDate.addEventListener('change', (e) => {
-        let startDateVal = e.target.value
-        document.getElementById('startDateSelected').innerText = startDateVal
-    })
-
-    endDate.addEventListener('change', (e) => {
-        let endDateVal = e.target.value
-        document.getElementById('endDateSelected').innerText = endDateVal
-    })</script>*@

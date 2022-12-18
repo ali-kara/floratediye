@@ -78,13 +78,10 @@ namespace Web.Controllers
                 return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "" });
             }
 
-            WebSessionManager.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+            WebSessionManager.Set(SessionKeys.Kullanici, UserType.Üretici);
             WebSessionManager.Set(SessionKeys.FilterDate_Start, DateTime.Now);
-            WebSessionManager.Set(SessionKeys.FilterDate_End, DateTime.Today.Date);
-
-
-            var d1 = WebSessionManager.FilterDate_Start;
-            var d2 = WebSessionManager.Get(SessionKeys.FilterDate_End);
+            WebSessionManager.Set(SessionKeys.FilterDate_End, DateTime.Now);
+            WebSessionManager.Set<URETICILER>(SessionKeys.Uretici, Uretici);
 
 
             return Json(new { success = true, responseText = "Başarılı ile giriş yapıldı.", routelink = "/UreticiKayit/Index" });

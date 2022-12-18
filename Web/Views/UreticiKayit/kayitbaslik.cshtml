@@ -36,48 +36,102 @@
 
 }
 
-<table class="table table-responsive table-striped table-bordered" style="overflow-x: scroll">
+<script>
+    $("#Modal-t1").on('shown.bs.modal', function (e) {
+
+        var sube = $(e.relatedTarget).data('sube');
+        var tarih = $(e.relatedTarget).data('tarih');
+        var sirano = $(e.relatedTarget).data('sirano');
+
+        DetayGetir(sube, tarih, sirano);
+    });
+
+    $("#Modal-t1").on('hide.bs.modal', function (e) {
+        $("#Modal-t1 .modal-content").html("");
+    });
+
+    function DetayGetir(sube, tarih, sirano) {
+
+        var parameter = {
+            "sube": sube,
+            "tarih": tarih,
+            "sira_no": sirano
+        };
+
+        //alert(JSON.stringify(parameter));
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("kayitdetay", "UreticiKayit")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            data: JSON.stringify(parameter),
+            success: function (response) {
+                $("#Modal-t1 .modal-content").html(response);
+            },
+            error: function (data) {
+                toastr.error("Hata", data)
+            },
+        });
+    }
 
 
-        <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    Şube
-                </th>
-                <th>
-                    Toplam
-                </th>
 
-                <th>
-                    Kesinti
-                </th>
 
-                <th>
-                    Nakliye Zarar
-                </th>
+</script>
 
-                <th>
-                    Ödenecek
-                </th>
-                <th>
-                    ...
-                </th>
+<div id="Modal-t1" class="modal fade" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="padding:15px;">
 
-                <th>
-                    Tarih
-                </th>
+        </div>
+    </div>
+</div>
 
-                <th>
-                    Sıra No
-                </th>
 
-            </tr>
-        </thead>
+<table class="table table-responsive table-striped table-bordered" style="overflow-y:scroll;overflow-y:scroll">
 
-    
+        
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Şube
+            </th>
+            <th>
+                Toplam
+            </th>
+
+            <th>
+                Kesinti
+            </th>
+
+            <th>
+                Nakliye Zarar
+            </th>
+
+            <th>
+                Ödenecek
+            </th>
+            <th>
+                ...
+            </th>
+
+            <th>
+                Tarih
+            </th>
+
+            <th>
+                Sıra No
+            </th>
+
+        </tr>
+    </thead>
+
+
     <tbody>
         @foreach (var item in Model)
         {
@@ -123,8 +177,10 @@
                             new { @class = "btn btn-success" }
                             )*@
                         @*@Html.ActionLink("Detaylar", "KayitDetay", new { sube = item._SUBE.Trim(), tarih = item.ISLEM_TARIHI, sira_no = item.DEPO_SIRA_NO }, new { @class = "btn btn-success" })*@
-                        @Html.ActionLink("Detay", "kayitdetay", new { sube = item.sube.Trim(), tarih = item.tarih, sira_no = item.depo_sira_no }, new { @class = "btn btn-success" })
-
+                        @*@Html.ActionLink("Detay", "kayitdetay", new { sube = item.sube.Trim(), tarih = item.tarih, sira_no = item.depo_sira_no }, new { @class = "btn btn-success" })*@
+                        <button data-sube="@item.sube.Trim()" data-tarih =@item.tarih data-sirano=@item.depo_sira_no data-bs-toggle="modal" data-bs-target="#Modal-t1"  class="btn btn-success btnDetay">
+                            Detay
+                        </button>
                     </td>
                 }
 

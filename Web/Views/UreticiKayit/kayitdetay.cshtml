@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<satis>
 
-<h2>Kayıt Detay</h2>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-<p>
-    @Html.ActionLink("Listeye Geri Dön", "Index", "UreticiKayit", null, new { @class = "btn btn-primary" })
-</p>
+<br />
 
-<table class="table table-responsive table-bordered  table-striped">
+<table class="table table-responsive table-bordered  table-striped" style="overflow-x:scroll;">
 
     <thead>
         <tr>

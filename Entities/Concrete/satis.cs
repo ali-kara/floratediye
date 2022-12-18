@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Entities.Abstract;
@@ -6,6 +7,7 @@ namespace Entities.Concrete
 {
     public class satis : IEntity
     {
+
         public int id { get; set; }
 
         public short? sira_no { get; set; }
@@ -13,10 +15,13 @@ namespace Entities.Concrete
         public short? cic_kod { get; set; }
 
         [StringLength(20)]
+        [DisplayName("Çiçek Adı")]
         public string? cic_adi { get; set; }
 
+        [DisplayName("Çiçek Demet")]
         public short? cic_demet { get; set; }
 
+        [DisplayName("Çiçek Adet")]
         public short? cic_adet { get; set; }
 
         [StringLength(10)]
@@ -25,11 +30,13 @@ namespace Entities.Concrete
         [StringLength(30)]
         public string? uretici_adi { get; set; }
 
+        [DisplayName("Satış Fiyat")]
         public decimal? satis_fiyat { get; set; }
 
         public short? alici_sand { get; set; }
 
         [StringLength(10)]
+        [DisplayName("Alıcı Kodu")]
         public string? alici_kodu { get; set; }
 
         public short? d_s_no { get; set; }
@@ -39,6 +46,7 @@ namespace Entities.Concrete
         [Column(TypeName = "date")]
         public DateTime? tarih { get; set; }
 
+        [DisplayName("Toplam Tutar")]
         public decimal? toplam_tutar { get; set; }
 
         public short? cic_ana_kod { get; set; }

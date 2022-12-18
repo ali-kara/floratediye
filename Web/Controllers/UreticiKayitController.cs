@@ -9,7 +9,6 @@ namespace Web.Controllers
     public class UreticiKayitController : Controller
     {
         IUreticiKayitService ureticiKayitService;
-
         ISatisService satisService;
 
 
@@ -35,11 +34,14 @@ namespace Web.Controllers
             return PartialView("kayitbaslik", list);
         }
 
-        public IActionResult kayitdetay(string sube, DateTime? tarih, int sira_no)
+        [HttpPost]
+        public IActionResult kayitdetay([FromBody]KayitDetayRequest kayitDetayRequest)
         {
-            List<satis> list = satisService.GetDetailList(575, sube, tarih, sira_no);
+            DateTime date = DateTime.Parse(kayitDetayRequest.tarih);
 
-            return View(list);
+            List<satis> list = satisService.GetDetailList(575, kayitDetayRequest.sube, date.Date, kayitDetayRequest.sira_no);
+
+            return PartialView("kayitdetay", list);
         }
     }
 
@@ -47,9 +49,12 @@ namespace Web.Controllers
     {
         public DateTime dateStart { get; set; }
         public DateTime dateEnd { get; set; }
+    }
 
-
-       
-
+    public class KayitDetayRequest
+    {
+        public string sube { get; set; }
+        public string tarih { get; set; }
+        public int sira_no { get; set; }
     }
 }

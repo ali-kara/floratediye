@@ -8,7 +8,7 @@
 
 <div class="container shadow py-3">
     <div class="row">
-        <h4>@(WebSessionManager.Uretici.URETICI_NO + " - " + WebSessionManager.Uretici.ADI + " " + WebSessionManager.Uretici.SOYADI)</h4>
+        <h4>@(WebSessionManager2.Uretici.URETICI_NO + " - " + WebSessionManager2.Uretici.ADI + " " + WebSessionManager2.Uretici.SOYADI)</h4>
 
         <br />
 
@@ -56,14 +56,14 @@
 
         <div class="col-md-2 col">
             <div class="input-group date" id="datepickerBaslangic">
-                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBaslangic" name="datepickerBaslangic" value="@WebSessionManager.FilterDate_Start">
+                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBaslangic" name="datepickerBaslangic" value="@WebSessionManager2.FilterDate_Start">
                 <span style="padding: .375rem .75rem; background-color:lightgray;" class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
 
         <div class="col-md-2 col">
             <div class="input-group date" id="datepickerBitis">
-                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBitis" name="datepickerBitis" value="@WebSessionManager.FilterDate_End">
+                <input class="form-control" type="text" placeholder="Tarihi Seçiniz" id="datepickerBitis" name="datepickerBitis" value="@WebSessionManager2.FilterDate_End">
                 <span style="padding: .375rem .75rem; background-color:lightgray;" class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
         </div>
@@ -123,7 +123,7 @@
         //$("#datepickerBitis").datepicker("setDate", "25.01.1991");
 
 
-        //$("#datepickerBitis").datepicker("setDate", WebSessionManager.FilterDate_Start);
+        //$("#datepickerBitis").datepicker("setDate", WebSessionManager2.FilterDate_Start);
 
         GetUserRecords();
 

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Core.Utilities.Extensions
+namespace Core.Extensions
 {
 	public static class StringExtensions
 	{

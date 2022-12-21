@@ -2,8 +2,8 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
+using Core.Web.Utilities;
 using Web.Services;
-using Web.Tools;
 
 namespace Web;
 
@@ -15,7 +15,6 @@ public class Program
 
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-        builder.Services.AddTransient<ISessionManager, SessionManager>();
 
 
 
@@ -51,8 +50,9 @@ public class Program
         }
 
         var accessor = app.Services.GetService<IHttpContextAccessor>();
+
         AuthManager.SetHttpContextAccessor(accessor);
-        WebSessionManager.SetHttpContextAccessor(accessor);
+        SessionManager.SetHttpContextAccessor(accessor);
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();

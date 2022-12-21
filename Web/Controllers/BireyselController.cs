@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.VisualBasic;
 using Web.Services;
-using Web.Tools;
 
 namespace Web.Controllers
 {
@@ -16,7 +15,6 @@ namespace Web.Controllers
         readonly IUreticiOdemelerService ureticiOdemelerService;
         readonly IDuyurularService duyurularService;
         readonly IUreticilerService ureticilerService;
-        readonly ISessionManager sessionManager;
 
 
         public BireyselController(IUreticiOdemelerService ureticiOdemelerService, IDuyurularService duyurularService, IUreticilerService ureticilerService)
@@ -49,15 +47,15 @@ namespace Web.Controllers
 
             if (userfield == "yuskan" && passwordfield == "Yuskan2085@")
             {
-                WebSessionManager.Set(SessionKeys.Kullanici, UserType.Admin.ToString());
-                WebSessionManager.Set(SessionKeys.Admin, "SISTEM");
+                WebSessionManager2.Set(SessionKeys.Kullanici, UserType.Admin.ToString());
+                WebSessionManager2.Set(SessionKeys.Admin, "SISTEM");
 
                 return Json(new { success = true, responseText = "", routelink = "/Admin/Index" });
             }
             else if (userfield == "FLORA" && passwordfield == "1945")
             {
-                WebSessionManager.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
-                WebSessionManager.Set(SessionKeys.Admin, "SISTEM");
+                WebSessionManager2.Set(SessionKeys.Kullanici, UserType.MezatGorevlisi);
+                WebSessionManager2.Set(SessionKeys.Admin, "SISTEM");
 
                 return Json(new { success = true, responseText = "", routelink = "/Duyurular/Index" });
             }
@@ -78,10 +76,10 @@ namespace Web.Controllers
                 return Json(new { success = false, responseText = "Kullanıcı adı ve Parola ile eşleşen bir kullanıcı yok.", routelink = "" });
             }
 
-            WebSessionManager.Set(SessionKeys.Kullanici, UserType.Üretici);
-            WebSessionManager.Set(SessionKeys.FilterDate_Start, DateTime.Now);
-            WebSessionManager.Set(SessionKeys.FilterDate_End, DateTime.Now);
-            WebSessionManager.Set<URETICILER>(SessionKeys.Uretici, Uretici);
+            WebSessionManager2.Set(SessionKeys.Kullanici, UserType.Üretici);
+            WebSessionManager2.Set(SessionKeys.FilterDate_Start, DateTime.Now);
+            WebSessionManager2.Set(SessionKeys.FilterDate_End, DateTime.Now);
+            WebSessionManager2.Set<URETICILER>(SessionKeys.Uretici, Uretici);
 
 
             return Json(new { success = true, responseText = "Başarılı ile giriş yapıldı.", routelink = "/UreticiKayit/Index" });
